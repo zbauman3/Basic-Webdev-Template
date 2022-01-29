@@ -102,3 +102,8 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Zane
+bundle.js
+*.code-workspace
+.DS_Store

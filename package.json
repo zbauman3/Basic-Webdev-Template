@@ -1,0 +1,53 @@
+{
+  "name": "basic-webdev-template",
+  "version": "1.0.0",
+  "description": "A basic template for starting a web development project",
+  "scripts": {
+    "lint": "npx eslint",
+    "tsc": "npx zx ./mgmt/build/tsc.js",
+    "webpack": "npx zx ./mgmt/build/webpack.js",
+    "docker": "npx zx ./mgmt/build/docker.js",
+    "pm2": "npx zx ./mgmt/build/pm2.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zbauman3/Basic-Webdev-Template.git"
+  },
+  "author": "Zane Bauman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zbauman3/Basic-Webdev-Template/issues"
+  },
+  "homepage": "https://github.com/zbauman3/Basic-Webdev-Template#readme",
+  "dependencies": {
+    "@trpc/client": "^9.18.0",
+    "@trpc/react": "^9.18.0",
+    "@trpc/server": "^9.18.0",
+    "core-js": "^3.20.3",
+    "express": "^4.17.2",
+    "pm2": "^5.1.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-jss": "^10.9.0",
+    "react-query": "^3.34.12",
+    "zod": "^3.11.6",
+    "zx": "^4.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.12",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
+    "@types/node": "^17.0.13",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.10.1",
+    "@typescript-eslint/parser": "^5.10.1",
+    "babel-loader": "^8.2.3",
+    "eslint": "^8.7.0",
+    "typescript": "^4.5.5",
+    "webpack": "^5.67.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.3"
+  }
+}

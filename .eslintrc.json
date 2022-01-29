@@ -1,0 +1,33 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
+    "ignorePatterns": ["bundle.js"],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 6
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "indent": ["error", "tab", {
+            "MemberExpression": 0,
+            "flatTernaryExpressions": true,
+            "offsetTernaryExpressions": false,
+            "SwitchCase": 1,
+            "ArrayExpression": 1,
+            "ignoreComments": true
+        }],
+		"semi": ["error", "always"],
+        "no-mixed-spaces-and-tabs": "error",
+        "@typescript-eslint/no-var-requires": "warn",
+		"valid-typeof": ["error", {
+			"requireStringLiterals": true
+		}],
+		"eqeqeq": ["error", "always"],
+		"no-invalid-this": "error"
+    }
+}

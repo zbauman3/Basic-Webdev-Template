@@ -1,0 +1,39 @@
+{
+	"compilerOptions": {
+		"moduleResolution": "node",
+		"module": "CommonJs",
+		"target": "es2020",
+		"isolatedModules": true,
+
+		"allowJs": true,
+		"incremental": true,
+		"composite": true,
+		"declaration": true,
+		"outDir": "./dist",
+		"rootDir": "./src",
+
+		"strict": true,
+		"alwaysStrict": true,
+		"noImplicitAny": true,
+		"noImplicitThis": true,
+		"strictBindCallApply": true,
+		"strictFunctionTypes": true,
+		"strictNullChecks": true,
+		"strictPropertyInitialization": true,
+
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitReturns": true,
+		"noPropertyAccessFromIndexSignature": false,
+		"noUncheckedIndexedAccess": true,
+		"noUnusedLocals": true,
+		"allowUnreachableCode": false,
+		"allowUnusedLabels": false,
+
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"noEmitOnError": true,
+		"resolveJsonModule": true
+	},
+	"include": ["./src/**/*"]
+}

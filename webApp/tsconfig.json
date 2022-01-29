@@ -1,0 +1,45 @@
+{
+	"compilerOptions": {
+		"moduleResolution": "node",
+		"module": "CommonJS",
+		"target": "es2020",
+		"lib": ["es2020", "dom"],
+		"isolatedModules": true,
+
+		"allowJs": true,
+		"jsx": "react",
+		"sourceMap": true,
+		"incremental": true,
+		"outDir": "./dist",
+		"rootDir": "./src",
+		"declaration": true,
+		"noEmit": true,
+
+		"strict": true,
+		"alwaysStrict": true,
+		"noImplicitAny": true,
+		"noImplicitThis": true,
+		"strictBindCallApply": true,
+		"strictFunctionTypes": true,
+		"strictNullChecks": true,
+		"strictPropertyInitialization": true,
+
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitReturns": true,
+		"noPropertyAccessFromIndexSignature": false,
+		"noUncheckedIndexedAccess": true,
+		"noUnusedLocals": true,
+		"allowUnreachableCode": false,
+		"allowUnusedLabels": false,
+
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"noEmitOnError": true,
+		"resolveJsonModule": true
+	},
+	"include": ["./src/**/*"],
+	"references": [
+        { "path": "../shared/" }
+    ]
+}
