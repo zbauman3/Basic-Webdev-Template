@@ -6,11 +6,11 @@ const shared_1 = require("./shared");
     (0, zx_1.cd)(shared_1.rootPath);
     let [, argument] = zx_1.argv._;
     let didOne = false;
-    const force = (!!zx_1.argv['f'] || !!zx_1.argv['force'] ? '--force' : '');
-    const watch = (!!zx_1.argv['w'] || !!zx_1.argv['watch'] ? '--watch' : '');
     if (!argument) {
         argument = 'all';
     }
+    const force = (!!zx_1.argv['f'] || !!zx_1.argv['force'] ? '--force' : '');
+    const watch = (argument !== 'all' && (!!zx_1.argv['w'] || !!zx_1.argv['watch']) ? '--watch' : '');
     if (argument === 'shared' || argument === 'all') {
         await (0, zx_1.$) `npx tsc -b ${force} ${watch} ./shared/`;
         didOne = true;

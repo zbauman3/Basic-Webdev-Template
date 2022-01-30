@@ -9,7 +9,6 @@
 		"allowJs": true,
 		"jsx": "react",
 		"sourceMap": true,
-		"incremental": true,
 		"outDir": "./dist",
 		"rootDir": "./src",
 		"declaration": true,

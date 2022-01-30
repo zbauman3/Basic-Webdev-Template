@@ -6,10 +6,12 @@ const shared_1 = require("./shared");
     (0, zx_1.cd)(shared_1.rootPath);
     let [, argument] = zx_1.argv._;
     if (argument === 'serve') {
-        await (0, zx_1.$) `npx zx ${zx_1.path.resolve(__dirname, './pm2.js')} use-webpack-serve`;
-        await (0, zx_1.$) `${shared_1.config.env.WEBPACK_DEV_SERVER}=true npx webpack serve --config ./webApp/webpack.config.js`;
+        await (0, zx_1.$) `npm run pm2 -- use-webpack-serve`;
+        console.log(`\r\nDon't forget to run ${zx_1.chalk.blue('npm run pm2 -- use-webpack-bundle')} to switch back to using the Webpack bundle.\r\n`);
+        process.env[shared_1.config.env.WEBPACK_DEV_SERVER] = "true";
+        await (0, zx_1.$) `npx webpack serve --color --config ./webApp/webpack.config.js`;
         process.exit(0);
     }
-    await (0, zx_1.$) `${shared_1.config.env.WEBPACK_DEV_SERVER}=false npx webpack --config ./webApp/webpack.config.js`;
+    await (0, zx_1.$) `npx webpack --color --config ./webApp/webpack.config.js`;
     process.exit(0);
 })();

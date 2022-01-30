@@ -6,7 +6,6 @@
 		"isolatedModules": true,
 
 		"allowJs": true,
-		"incremental": true,
 		"outDir": "./build",
 		"rootDir": "./src",
 

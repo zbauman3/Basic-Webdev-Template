@@ -7,7 +7,8 @@
     "tsc": "npx zx ./mgmt/build/tsc.js",
     "webpack": "npx zx ./mgmt/build/webpack.js",
     "docker": "npx zx ./mgmt/build/docker.js",
-    "pm2": "npx zx ./mgmt/build/pm2.js"
+    "pm2": "npx zx ./mgmt/build/pm2.js",
+    "start-dev": "npx zx ./mgmt/build/docker.js start && echo \"Waiting 15s for Docker\" && sleep 15 && npx zx ./mgmt/build/webpack.js serve"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/zbauman3/Basic-Webdev-Template#readme",
   "dependencies": {
+    "@pm2/io": "^5.0.0",
     "@trpc/client": "^9.18.0",
     "@trpc/react": "^9.18.0",
     "@trpc/server": "^9.18.0",

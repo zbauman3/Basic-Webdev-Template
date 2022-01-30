@@ -1,5 +1,6 @@
-import { $, argv, cd } from 'zx';
-import { rootPath, config } from "./shared";
+import { $, argv, cd, chalk } from 'zx';
+import { rootPath } from "./shared";
+import { spawnSync } from "child_process";
 
 (async ()=>{
 
@@ -9,25 +10,39 @@ import { rootPath, config } from "./shared";
 
 	if(argument === 'use-webpack-serve'){
 
-		await $`docker exec ${(process.stdout.isTTY ? '-ti' : '-i')} -e ${config.env.WEBPACK_DEV_SERVER}=true nodeWebServer npx pm2 restart -a webServer`;
+		await $`docker exec ${(process.stdout.isTTY ? '-ti' : '-i')} nodeWebServer npx pm2 trigger webServer use-webpack-serve`;
 		process.exit(0);
 
 	}
 
 	if(argument === 'use-webpack-bundle'){
 
-		await $`docker exec ${(process.stdout.isTTY ? '-ti' : '-i')} -e ${config.env.WEBPACK_DEV_SERVER}=false nodeWebServer npx pm2 restart -a webServer`;
+		await $`docker exec ${(process.stdout.isTTY ? '-ti' : '-i')} nodeWebServer npx pm2 trigger webServer use-webpack-bundle`;
 		process.exit(0);
 
 	}
 
-	const {_: [, ...args], ...rest} = argv;
+	//mimic `zx` logging
+	console.log(`$ ${chalk.green('docker')} exec ${(process.stdout.isTTY ? '-ti' : '-i')} nodeWebServer npx pm2 ${process.argv.slice(3).join(' ')}`);
 
-	const parsedArgs = Object.entries(rest).map(([k,v])=>(
-		`${k.length > 1 ? '--' : '-'}${k}${v !== undefined && typeof v !== 'boolean' && (typeof v !== 'string' || v.length > 0) ? `=${v}` : ''}`
-	));
+	//using spawn sync so that we can 'inherit' stdio. zx doesnt allow this currently.
+	const {status, signal, error} = spawnSync(`docker`, [
+		'exec',
+		(process.stdout.isTTY ? '-ti' : '-i'),
+		'nodeWebServer',
+		'npx',
+		'pm2',
+		...process.argv.slice(3)
+	], { stdio: 'inherit' });
 
-	await $`docker exec ${(process.stdout.isTTY ? '-ti' : '-i')} nodeWebServer npx pm2 ${parsedArgs} ${args}`;
-	process.exit(0);
+	if(!!error){
+		throw error;
+	}
+
+	if(!!signal){
+		throw new Error(signal);
+	}
+
+	process.exit(typeof status !== 'number' ? 0 : status);
 
 })();

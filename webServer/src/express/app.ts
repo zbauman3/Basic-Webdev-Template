@@ -1,9 +1,9 @@
 import express from 'express';
+import pmx from "@pm2/io";
 import { resolve as resolvePath } from 'path';
 import config from "../../../shared/dist/config";
 
 const app = express();
-const isDevServer = (`${process.env[config.env.WEBPACK_DEV_SERVER]}` === 'true');
 
 app.disable('x-powered-by');
 app.set('query parser', 'simple');
@@ -36,6 +36,30 @@ app.locals.sendFileOptions = {
 	acceptRanges: false
 };
 
+app.locals.bundlePort = config.ports.webServer;
+
+//a PM2 action to start using the webpack dev server
+pmx.action('use-webpack-serve', (_: any, reply?: Function)=>{
+
+	app.locals.bundlePort = config.ports.webpack;
+
+	if(typeof reply === 'function'){
+		reply(`Success: Using bundle on port ${app.locals.bundlePort}.`);
+	}
+
+});
+
+//a PM2 action to start using the webpack bundle
+pmx.action('use-webpack-bundle', (_: any, reply?: Function)=>{
+
+	app.locals.bundlePort = config.ports.webServer;
+
+	if(typeof reply === 'function'){
+		reply(`Success: Using bundle on port ${app.locals.bundlePort}.`);
+	}
+
+});
+
 //javascript files
 app.all('/bundle.js', (_, res)=>{
 
@@ -58,7 +82,7 @@ app.all('*', (_, res)=>{
 		</head>
 		<body>
 			<div id="root"></div>
-			<script src="http://localhost:${isDevServer ? config.ports.webpack : config.ports.webServer}/bundle.js"></script>
+			<script src="http://localhost:${app.locals.bundlePort}/bundle.js"></script>
 		</body>
 		</html>`.replace(/\t+/g, '')
 	)

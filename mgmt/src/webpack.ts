@@ -1,4 +1,4 @@
-import { $, cd, argv, path } from 'zx';
+import { $, cd, argv, chalk } from 'zx';
 import { rootPath, config } from "./shared";
 
 (async ()=>{
@@ -9,13 +9,15 @@ import { rootPath, config } from "./shared";
 
 	if(argument === 'serve'){
 
-		await $`npx zx ${path.resolve(__dirname, './pm2.js')} use-webpack-serve`;
-		await $`${config.env.WEBPACK_DEV_SERVER}=true npx webpack serve --config ./webApp/webpack.config.js`;
+		await $`npm run pm2 -- use-webpack-serve`;
+		console.log(`\r\nDon't forget to run ${chalk.blue('npm run pm2 -- use-webpack-bundle')} to switch back to using the Webpack bundle.\r\n`);
+		process.env[config.env.WEBPACK_DEV_SERVER] = "true";
+		await $`npx webpack serve --color --config ./webApp/webpack.config.js`;
 		process.exit(0);
 
 	}
 
-	await $`${config.env.WEBPACK_DEV_SERVER}=false npx webpack --config ./webApp/webpack.config.js`;
+	await $`npx webpack --color --config ./webApp/webpack.config.js`;
 	process.exit(0);
 
 })();

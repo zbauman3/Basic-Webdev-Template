@@ -7,12 +7,13 @@ import { rootPath } from "./shared";
 
 	let [, argument] = argv._;
 	let didOne = false;
-	const force = (!!argv['f'] || !!argv['force'] ? '--force' : '');
-	const watch = (!!argv['w'] || !!argv['watch'] ? '--watch' : '');
 
 	if(!argument){
 		argument = 'all';
 	}
+
+	const force = (!!argv['f'] || !!argv['force'] ? '--force' : '');
+	const watch = (argument !== 'all' && (!!argv['w'] || !!argv['watch']) ? '--watch' : '');
 
 	if(argument === 'shared' || argument === 'all'){
 
