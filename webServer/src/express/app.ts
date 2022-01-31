@@ -1,12 +1,18 @@
 import express from 'express';
 import pmx from "@pm2/io";
 import { resolve as resolvePath } from 'path';
+import { json as jsonBodyParser } from 'body-parser';
 import config from "../../../shared/dist/config";
+import allEndpointHandlers from "./allEndpointHandlers";
 
 const app = express();
 
 app.disable('x-powered-by');
 app.set('query parser', 'simple');
+
+app.use(jsonBodyParser({
+	strict: true
+}));
 
 //set the default timeout to 30 seconds
 app.use(function(req, res, next){
@@ -67,6 +73,14 @@ app.all('/bundle.js', (_, res)=>{
 
 });
 
+//add all endpoint handlers
+for(const {method, path, handler} of allEndpointHandlers){
+
+	app[method](path, handler);
+
+}
+
+//handle the fallback
 app.all('*', (_, res)=>{
 
 	res
@@ -82,7 +96,7 @@ app.all('*', (_, res)=>{
 		</head>
 		<body>
 			<div id="root"></div>
-			<script src="http://localhost:${app.locals.bundlePort}/bundle.js"></script>
+			<script src="${config.proto}://${config.host}:${app.locals.bundlePort}/bundle.js"></script>
 		</body>
 		</html>`.replace(/\t+/g, '')
 	)

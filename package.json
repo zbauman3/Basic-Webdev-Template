@@ -22,9 +22,7 @@
   "homepage": "https://github.com/zbauman3/Basic-Webdev-Template#readme",
   "dependencies": {
     "@pm2/io": "^5.0.0",
-    "@trpc/client": "^9.18.0",
-    "@trpc/react": "^9.18.0",
-    "@trpc/server": "^9.18.0",
+    "body-parser": "^1.19.1",
     "core-js": "^3.20.3",
     "express": "^4.17.2",
     "pm2": "^5.1.2",
