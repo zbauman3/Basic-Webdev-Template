@@ -2,7 +2,7 @@ const path = require('path');
 const config = require('../shared/dist/config').default;
 
 const browserslist = '> 0.09%, not IE 11, not dead';
-const isDevServer = (`${process.env[config.env.WEBPACK_DEV_SERVER]}` === 'true');
+const isDevServer = !!process.env.WEBPACK_DEV_SERVER;
 
 module.exports = {
 	mode: (isDevServer ? 'development' : 'production'),

@@ -1,5 +1,5 @@
 import { $, cd, argv, chalk } from 'zx';
-import { rootPath, config } from "./shared";
+import { rootPath } from "./shared";
 
 (async ()=>{
 
@@ -11,7 +11,6 @@ import { rootPath, config } from "./shared";
 
 		await $`npm run pm2 -- use-webpack-serve`;
 		console.log(`\r\nDon't forget to run ${chalk.blue('npm run pm2 -- use-webpack-bundle')} to switch back to using the Webpack bundle.\r\n`);
-		process.env[config.env.WEBPACK_DEV_SERVER] = "true";
 		await $`npx webpack serve --color --config ./webApp/webpack.config.js`;
 		process.exit(0);
 
