@@ -15,21 +15,32 @@ export const isMobileNavigator = (): boolean=>{
 };
 
 /** Checks if the device is capable of touch events */
-export const isTouchCapable = (): boolean=>('ontouchstart' in document.documentElement);
+export const isTouchCapable = (): boolean=>(
+	('ontouchstart' in window) ||
+	(!!navigator.maxTouchPoints && navigator.maxTouchPoints > 0)
+);
 
 
 /** The checks if the screen is a small screen. */
 export const isSmallScreen = (): boolean=>{
 
-	const smallScreenSize = 834;
+	//based on ipad widths (834x1194)
+	const smallScreenSize = {
+		width: 834,
+		height: 1194
+	};
 
 	if(canUseMatchMedia){
 
-		return window.matchMedia(`only screen and (max-width: ${smallScreenSize}px)`).matches;
+		//check for portrait or landscape sizes
+		return (
+			window.matchMedia(`only screen and (orientation: portrait) and (max-width: ${smallScreenSize.width}px)`).matches ||
+			window.matchMedia(`only screen and (orientation: landscape) and (max-width: ${smallScreenSize.height}px)`).matches
+		);
 
 	}
 
-	return (window.innerWidth <= smallScreenSize);
+	return (Math.min(window.innerHeight, window.innerWidth) <= smallScreenSize.width);
 
 };
 
